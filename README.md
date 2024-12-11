@@ -19,8 +19,8 @@ Crypto Wallet API adalah aplikasi sederhana berbasis Node.js dan Express.js untu
 1. Clone repository:
 
    ```bash
-   git clone <repository-url>
-   cd <repository-folder>
+   git clone https://github.com/kevinherijanto24/cryptowallet-crud
+   cd cryptowallet-crud
    ```
 
 2. Instal dependensi:
@@ -32,7 +32,7 @@ Crypto Wallet API adalah aplikasi sederhana berbasis Node.js dan Express.js untu
 3. Jalankan server:
 
    ```bash
-   node app.js
+   node server.js
    ```
 
    Server akan berjalan di `http://localhost:3000`.
