@@ -16,6 +16,11 @@ app.get('/wallets', (req, res) => {
   } else {
     res.json(cryptoWallets);
   }
+  console.log('Invalid Request:');
+  console.log('Method:', req.method);
+  console.log('URL:', req.url);
+  console.log('Headers:', req.headers);
+  console.log('Body:', req.body);
 });
 
 // Endpoint untuk mendapatkan wallet berdasarkan ID
@@ -27,6 +32,7 @@ app.get('/wallets/:id', (req, res) => {
   } else {
     res.status(404).send('Wallet tidak ditemukan');
   }
+
 });
 
 // Endpoint untuk menambahkan wallet baru
@@ -72,9 +78,16 @@ app.delete('/wallets/:id', (req, res) => {
 });
 
 // Menangani request yang tidak valid
-app.use((req, res) => {
-  res.status(400).send('Bad Request');
-});
+app.use((req, res, next) => {
+    console.log('Invalid Request:');
+    console.log('Method:', req.method);
+    console.log('URL:', req.url);
+    console.log('Headers:', req.headers);
+    console.log('Body:', req.body);
+  
+    // Kirimkan respons Bad Request
+    res.status(400).send('Bad Request');
+  });
 
 // Menjalankan server
 app.listen(port, () => {
