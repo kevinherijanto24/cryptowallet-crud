@@ -67,15 +67,23 @@ app.put('/wallets/:id', (req, res) => {
 
 // Endpoint untuk menghapus wallet berdasarkan ID
 app.delete('/wallets/:id', (req, res) => {
-  const id = parseInt(req.params.id);
-  const walletIndex = cryptoWallets.findIndex(w => w.id === id);
-  if (walletIndex !== -1) {
-    cryptoWallets.splice(walletIndex, 1);
-    res.send('Wallet berhasil dihapus');
-  } else {
-    res.status(404).send('Wallet tidak ditemukan');
-  }
-});
+    const id = parseInt(req.params.id);
+    const walletIndex = cryptoWallets.findIndex(w => w.id === id);
+    if (walletIndex !== -1) {
+      // Hapus wallet berdasarkan index
+      cryptoWallets.splice(walletIndex, 1);
+  
+      // Perbarui ID semua wallet yang tersisa agar tetap berurutan
+      cryptoWallets = cryptoWallets.map((wallet, index) => ({
+        ...wallet,
+        id: index + 1 // Set ID baru berdasarkan urutan
+      }));
+  
+      res.send('Wallet berhasil dihapus dan ID diperbarui');
+    } else {
+      res.status(404).send('Wallet tidak ditemukan');
+    }
+  });
 
 // Menangani request yang tidak valid
 app.use((req, res, next) => {
